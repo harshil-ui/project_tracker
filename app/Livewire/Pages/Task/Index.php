@@ -6,9 +6,12 @@ use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+    
     public $task_id = null, $name, $description, $status, $due_date, $priority, $project_id;
     public $showModal = false;
     public $projects;
