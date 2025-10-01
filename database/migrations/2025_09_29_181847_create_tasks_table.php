@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->text('description');
-            $table->enum('status', ['to_do', 'in_progress', 'done'])->default('to_do');
+            $table->enum('status', ['to_do', 'in_progress', 'done', 'overdue'])->default('to_do');
             $table->date('due_date');
             $table->enum('priority', ['low', 'medium', 'high', 'emergency'])->default('medium');
             $table->softDeletes();

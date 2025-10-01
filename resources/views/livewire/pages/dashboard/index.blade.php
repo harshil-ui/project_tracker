@@ -1,4 +1,5 @@
-<x-app-layout>
+<div>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Dashboard') }}
@@ -20,7 +21,7 @@
                     </div>
                     <div>
                         <p class="text-gray-500 text-sm">Projects</p>
-                        <p class="text-xl font-semibold">24</p>
+                        <p class="text-xl font-semibold">{{ $totalProjects }}</p>
                     </div>
                 </div>
 
@@ -33,8 +34,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-gray-500 text-sm">Completed</p>
-                        <p class="text-xl font-semibold">18</p>
+                        <p class="text-gray-500 text-sm">Completed Tasks</p>
+                        <p class="text-xl font-semibold">{{ $completedTasks }}</p>
                     </div>
                 </div>
 
@@ -47,8 +48,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-gray-500 text-sm">In Progress</p>
-                        <p class="text-xl font-semibold">6</p>
+                        <p class="text-gray-500 text-sm">Pending Tasks</p>
+                        <p class="text-xl font-semibold">{{ $pendingTasks }}</p>
                     </div>
                 </div>
 
@@ -62,11 +63,11 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="text-gray-500 text-sm">Issues</p>
-                        <p class="text-xl font-semibold">3</p>
+                        <p class="text-gray-500 text-sm">Overdue Tasks</p>
+                        <p class="text-xl font-semibold">{{ $overDueTasks }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+</div>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 
 Route::middleware('guest')->group(function () {
     Volt::route('register', 'pages.auth.register')
@@ -33,5 +34,5 @@ Route::middleware('auth')->group(function () {
 
     Volt::route('tasks-list', 'pages.task.index')->name('tasks.index');
 
-    
+    Volt::route('dashboard', 'pages.dashboard.index')->name('dashboard');
 });

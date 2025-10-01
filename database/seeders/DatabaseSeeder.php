@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Project;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,11 +17,24 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
-            'role' => 'admin',
-            'password' => Hash::make('admin@admin.com')
+        User::factory()->createMany([
+            [
+                'name' => 'admin',
+                'email' => 'admin@admin.com',
+                'role' => 'admin',
+                'password' => Hash::make('admin@admin.com')
+            ],
+            [
+                'name' => 'user',
+                'email' => 'user@gmail.com',
+                'role' => 'user',
+                'password' => Hash::make('user@gmail.com')
+            ]
         ]);
+
+        Project::factory()
+            ->count(1000)
+            ->hasTasks(10)
+            ->create();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Livewire\Pages\Project;
 
 use App\Models\Project;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,6 +15,7 @@ class Index extends Component
     public $title;
     public $description;
     public $showModal = false;
+    public $user = null;
 
     protected $rules = [
         'title' => 'required|string',
@@ -22,10 +24,20 @@ class Index extends Component
 
     protected $paginationTheme = 'tailwind';
 
+    public function boot()
+    {
+        $this->user = Auth::user();
+    }
+
+    public function updated($property)
+    {
+        $this->validateOnly($property);
+    }
+
     public function render()
     {
         $projects = Project::select('id', 'title', 'description')->latest()
-            ->paginate(10);
+            ->paginate(5)->onEachSide(0);
 
         return view('livewire.pages.project.index', compact('projects'));
     }
@@ -61,6 +73,13 @@ class Index extends Component
 
     public function delete($id)
     {
+        $project = Project::with('tasks')->find($id);
+
+        if ($project->tasks->count() > 0) {
+            session()->flash('error', "This Project cannot be deleted because it has associated tasks.");
+            return $this->redirect(route('projects.index'), navigate: true);
+        }
+
         Project::find($id)->delete();
         session()->flash('message', "Project deleted successfully!");
         return $this->redirect(route('projects.index'), navigate: true);
